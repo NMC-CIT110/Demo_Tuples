@@ -27,15 +27,36 @@ namespace Demo_Tuples
 
         static void Main(string[] args)
         {
-            Gender genderType;
-            int age;
-            string fullName;
+            //Gender genderType;
+            //int age;
+            //string fullName;
+            (string fullName, int age, Gender genderType) information;
 
-            fullName = GetFullName();
-            age = getAge();
-            genderType = GetGender();
+            //fullName = GetFullName();
+            //age = getAge();
+            //genderType = GetGender();
+            information = GetInformation();
 
-            DisplayInfo(fullName, age, genderType);
+            //DisplayInfo(fullName, age, genderType);
+            DisplayInfoTuples(information);
+        }
+
+        private static (string fullName, int age, Gender genderType) GetInformation()
+        {
+            (string fullName, int age, Gender genderType) information;
+
+            DisplayScreenHeader("Information");
+
+            Console.Write("Full Name:");
+            information.fullName = Console.ReadLine();
+            Console.Write("Age:");
+            information.age = int.Parse(Console.ReadLine());
+            Console.Write("Gender:");
+            Enum.TryParse(Console.ReadLine(), out information.genderType);
+
+            DisplayContinuePrompt();
+
+            return information;
         }
 
         private static string GetFullName()
@@ -87,6 +108,17 @@ namespace Demo_Tuples
             Console.WriteLine($"Full name: {fullName}");
             Console.WriteLine($"Age: {age}");
             Console.WriteLine($"Gender: {genderType}");
+
+            DisplayContinuePrompt();
+        }
+
+        private static void DisplayInfoTuples((string fullName, int age, Gender genderType) information)
+        {
+            DisplayScreenHeader("Information");
+
+            Console.WriteLine($"Full name: {information.fullName}");
+            Console.WriteLine($"Age: {information.age}");
+            Console.WriteLine($"Gender: {information.genderType}");
 
             DisplayContinuePrompt();
         }
